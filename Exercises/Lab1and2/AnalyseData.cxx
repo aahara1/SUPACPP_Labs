@@ -45,43 +45,48 @@ readInFile(data_file,xVals,yVals);
 readInFile(error_file,xValsE,yValsE);
 
 
-std::cout << "would you like to print out N lines of data y/n";
-std::cin >> printYN;
+int choice;
+bool Running;
 
-if (printYN == "y"){
-    printOut(xVals,yVals);
+Running = true;
+while (Running){
+    std::cout << "select an option on what to do." << std::endl;
+    std::cout << "1. Print out N lines of data." << std::endl;
+    std::cout << "2. Calculate the magnitude of each data point." << std::endl;
+    std::cout << "3. Find the line of best fit and the chi squared/NDoF of the data." << std::endl;
+    std::cout << "4. Find x^y for each data point." << std::endl;
+    std::cout <<"5. Exit" <<std::endl;
+    std::cin >> choice;
+
+    if (choice == 1){
+        printOut(xVals,yVals);
+    }
+
+    if (choice == 2){
+        magnitude(xVals,yVals,mag);
+        printOut(mag);
+        saveFile(mag,"magnitudeData.txt");
+    }
+
+    if (choice == 3){
+        bestFit(xVals,yVals, "bestFit.txt",m,c,yValsE, chi2DOF);
+        printOut(m,c);
+        saveFile(m,c,chi2DOF,"LineFitData.txt");
+    }
+
+    if (choice == 4){
+        xPOWERy(xVals,yVals,xTOy);
+        printOut(xTOy);
+        saveFile(xTOy,"powerData.txt");
+    }
+
+    if (choice == 5){
+        Running = false;
+    }
 }
 
 
-std::cout << "would you like to calculate the magnitude of the data points and save it to a file y/n";
-std::cin >> magYN;
 
-if (magYN =="y"){
-    magnitude(xVals,yVals,mag);
-    printOut(mag);
-    saveFile(mag,"magnitudeData.txt");
-}
-
-
-
-
-std::cout << "would you like to calculate the line of best fit and save it to a file y/n";
-std::cin >> fitYN;
-
-if (fitYN =="y"){
-    bestFit(xVals,yVals, "bestFit.txt",m,c,yValsE, chi2DOF);
-    printOut(m,c);
-    saveFile(m,c,chi2DOF,"LineFitData.txt");
-}
-
-std::cout << "would you like to calculate the x^y and save it to a file y/n";
-std::cin >> powerYN;
-
-if (powerYN =="y"){
-    xPOWERy(xVals,yVals,xTOy);
-    printOut(xTOy);
-    saveFile(xTOy,"powerData.txt");
-}
 
 
 data_file.close();

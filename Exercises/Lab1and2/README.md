@@ -1,0 +1,1 @@
+to run this file, simply get into the Lab1and2 directory, and run ./DataAnalysis. From there it will prompt you to input a number for which functionality you want to do.
