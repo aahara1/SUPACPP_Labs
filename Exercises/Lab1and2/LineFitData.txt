@@ -1,0 +1,2 @@
+y=0.126265x+2.02628
+Chi squared test divided by DoF is: 34401.9
